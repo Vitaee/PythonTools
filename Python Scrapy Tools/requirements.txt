@@ -1,0 +1,8 @@
+selenium
+requests
+beatifulsoup4
+firebase
+sqlite3
+matplotlib
+xlrd
+json
