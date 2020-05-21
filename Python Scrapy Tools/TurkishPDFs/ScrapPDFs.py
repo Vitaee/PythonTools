@@ -66,26 +66,15 @@ class main:
                 self.KitapIndir(self.FirstDownloadLink)
 
     def KitapIndir(self, source_link):
-        print("Gerçek indirme linki bekleniyor.")
-        #İNDİRME LİNKİ SORUNU VAR.
-        page = requests.get(source_link, headers=self.user_id)
-        sleep(21)
-        print("Bekleme süresi bitti.")
-        source = page.text
-        soup = BeautifulSoup(source, 'html.parser')
-        download_data = soup.find_all('div', id='alternatives')
-        for item in download_data:
-            items = item.find('div',class_='text-center')
-            print(items)
-        exit()
+
         data = {"Kitap İsmi":self.BookName,
                 "Kitap Sayfa Sayısı":self.BookPages,
                 "Kitap Yılı": self.BookYear,
                 "Kitap Boyutu":self.BookSize,
-                "Kitap Link":self.all_hrefs}
+                "Kitap Link":self.FirstDownloadLink}
 
         self.my_json["pdfbooks"].append(data)
-        self.saveResults(self.BookName, self.BookPages, self.BookYear, self.BookSize)
+        self.saveResults(self.BookName, self.BookPages, self.BookYear, self.BookSize, self.FirstDownloadLink)
 
     def saveResults(self,BookName, BookPages, BookYear, BookSize):
         with open('pdfbooks.json','w+',encoding='UTF-8') as file:
