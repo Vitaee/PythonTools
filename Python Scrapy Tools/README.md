@@ -1,2 +1,3 @@
 # Used Modules
-requests - beatiuflsoup, pandas - xlrd - matplotlib
+requests - beatiuflsoup - selenium - xlrd - matplotlib - json - sqlite3 - firebase
+
