@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-class main:
+class TechNews:
     def __init__(self):
         self.user_id = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"}
         self.base_url = "https://flipboard.com/section/teknoloji-a0isdrb4bs8bb7n1"
@@ -54,9 +54,30 @@ class main:
 
         self.VeriGoster()
     def VeriGoster(self):
-        #print(self.NewsTitle)
-        pass
+        print(self.NewsTitle)
+        #pass
 
         
-if __name__ == '__main__':
-    main().VeriBelirle()
+class SportNews:
+    def __init__(self):
+        self.baseurl = "https://flipboard.com/section/spor-d7ilibva0mpg02ec"
+        self.user_id = {"user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.138 Safari/537.36"}
+
+        self.NewsTitle = []
+        self.NewsShortContent = []
+        self.SourceWebSite = []
+        self.NewsAvatar = []
+
+    def VeriBelirle(self):
+        page = requests.get(self.baseurl, headers=self.user_id)
+        source = page.text
+        soup = BeautifulSoup(source, 'html.parser')
+
+        # Href belirle
+        data = soup.find_all("h1", class_="post__title article-text--title--large")
+        for item in data:
+            items = item.find('a')
+            self.VeriCek("https://flipboard.com" + items['href'])
+
+    def VeriCek(self, url):
+        print(url)
