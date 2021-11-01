@@ -1,6 +1,6 @@
 selenium
 requests
-beatifulsoup4
+bs4
 firebase
 sqlite3
 matplotlib

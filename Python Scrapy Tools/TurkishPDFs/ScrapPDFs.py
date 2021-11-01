@@ -63,9 +63,9 @@ class main:
                 items = item.find('a')
                 self.FirstDownloadLink = "https://www.pdfdrivetr.com/"+items['href']
 
-                self.KitapIndir(self.FirstDownloadLink)
+                self.KitapIndir()
 
-    def KitapIndir(self, source_link):
+    def KitapIndir(self):
 
         data = {"Kitap İsmi":self.BookName,
                 "Kitap Sayfa Sayısı":self.BookPages,

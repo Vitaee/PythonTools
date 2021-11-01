@@ -3,20 +3,22 @@ import json
 from bs4 import BeautifulSoup
 import os
 class main:
-    def __init__(self):
+    def __init__(self) -> None:
         self.bountyName = []
         self.bountyDownLink = []
         self.bountyAvatar = []
         self.bountyAnalyse = []
         self.my_json = {"wallpapers": []}
         self.link_history = []
+
         with open('wallpapers.json', 'r', encoding='utf-8') as file:
             data = json.load(file)
+
         for item in data['wallpapers']:
             try: self.link_history.append(item['Kaynak Link'])
             except: pass
 
-    def start(self):
+    def start(self) -> None:
         for i in range(1,5):
             print("[LOG]\tWallpaper botu başladı. {}. sayfa taranıyor".format(i))
             response = requests.get("http://wallpaperswide.com/page/" + str(i))
@@ -24,13 +26,13 @@ class main:
             soup = BeautifulSoup(whole_source, 'html.parser')
             self.analyse(soup)
 
-    def analyse(self, source):
+    def analyse(self, source) -> None:
         link = source.find_all('div', class_='thumb')
         for hrefs in link:
             links = hrefs.find('a')
             self.detail('http://wallpaperswide.com' + links['href'])
 
-    def detail(self,link):
+    def detail(self,link:str) -> None:
         if link in self.link_history:
             print("Aynı link denk geldi.")
         else:
@@ -64,6 +66,6 @@ class main:
             self.save(avatar, button, name)
 
 
-    def save(self, avatar, button, name):
+    def save(self, avatar:str, button:str, name:str) -> None:
         with open('wallpapers.json', 'w+', encoding='UTF-8') as file:
             json.dump(self.my_json, file ,indent=2)
